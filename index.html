@@ -9,6 +9,7 @@
   <ul id="messages"></ul>
 
   <form action="">
+    <input id="nickname" value="Anonymous" />
     <input id="msg" autocomplete="off" />
     <button>Send</button>
   </form>
@@ -18,7 +19,9 @@
   <script>
     var socket = io(); /* global io */
     $('form').submit(function(){
-      socket.emit('chat message', $('#msg').val());
+      var msg = { author: $('#nickname').val(),
+        message: $('#msg').val() };
+      socket.emit('chat message', msg);
       $('#msg').val('');
       return false;
     });

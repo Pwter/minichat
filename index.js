@@ -14,7 +14,7 @@ app.get('/index.css', function(req,res) {
 io.on('connection', function(socket) {
   io.emit('chat message', 'user connected');
   socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
+    io.emit('chat message', msg.author + ": " + msg.message);
   });
   socket.on('disconnect', function() {
     io.emit('chat message', 'user disconnected');
